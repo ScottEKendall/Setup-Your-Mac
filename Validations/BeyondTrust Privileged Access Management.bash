@@ -15,6 +15,9 @@
 #   Version 0.0.2, 07-Jun-2024, Dan K. Snelson (@dan-snelson)
 #       Updates for BT PMfM 24.x
 #
+#   Version 0.0.3, 10-Mar-2025, Dan K. Snelson (@dan-snelson)
+#       Updates for BT PMfM 25.2
+#
 ####################################################################################################
 
 
@@ -25,7 +28,7 @@
 #
 ####################################################################################################
 
-scriptVersion="0.0.2"
+scriptVersion="0.0.3"
 export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin/
 
 
@@ -78,7 +81,7 @@ procesStatus "Custodian"
 # procesStatus "PMCAdapter"
 procesStatus "PMCPackageManager"
 procesStatus "PrivilegeManagement"
-procesStatus "NewPrivilegeManagement"
+# procesStatus "NewPrivilegeManagement"
 
 
 
