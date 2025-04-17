@@ -8,7 +8,7 @@
 ########################################################################################################################################
 
 export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin/
-scriptVersion="0.0.5"
+scriptVersion="0.0.8"
 RESULT="Failed: Not Installed"
 lastConnectedVariance="7" # The number of days before reporting device has not connected to the CrowdStrike Cloud.
 
@@ -58,11 +58,14 @@ if [[ -d "/Applications/Falcon.app" ]]; then
     falconBinary="/Applications/Falcon.app/Contents/Resources/falconctl"
     falconAgentStats=$( "$falconBinary" stats agent_info Communications 2>&1 )
 
-    if [[ "${falconAgentStats}" == *"Error: Error"* ]]; then
+    if [[ "${falconAgentStats}" == *"Error"* ]] || [[ "${falconAgentStats}" == *"No such file"* ]]; then
 
         case ${falconAgentStats} in
-            *"status.bin"*  ) RESULT="'status.bin' NOT found" ;;
-            *               ) RESULT="${falconAgentStats}" ;;
+            *"Sensor operational: true"*    ) RESULT="Running" ;;
+            *"Error"*                       ) RESULT="${falconAgentStats}" ;;
+            *"status.bin"*                  ) RESULT="'status.bin' NOT found" ;;
+            *"No such file"*                ) RESULT="Not Installed" ;;
+            *                               ) RESULT="Unknown" ;;
         esac        
 
         echo "<result>${RESULT}</result>"
