@@ -12,6 +12,7 @@ The implementation of recent [feature request](https://github.com/dan-snelson/di
 
 ### Scripts
 - [Check Printer Install](Check%20Printer%20Install.sh)
+- [Cisco Umbrella](Cisco%20Umbrella.bash)
 - [CrowdStrike Falcon Status](CrowdStrike%20Falcon%20Status.bash)
 - [Microsoft Office 365](Microsoft%20Office%20365.bash)
 - [Palo Alto Networks GlobalProtect Status](Palo%20Alto%20Networks%20GlobalProtect%20Status.bash)
