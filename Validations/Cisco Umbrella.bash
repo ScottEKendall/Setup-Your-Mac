@@ -25,6 +25,9 @@
 #   Version 0.0.5, 13-May-2025, Dan K. Snelson (@dan-snelson)
 #       Added a retry loop for failed filter check
 #
+#   Version 0.0.6, 14-May-2025, Dan K. Snelson (@dan-snelson)
+#       Changed filter check to nslookup of debug.opendns.com
+#
 ####################################################################################################
 
 
@@ -35,11 +38,8 @@
 #
 ####################################################################################################
 
-scriptVersion="0.0.5"
+scriptVersion="0.0.6"
 export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin/
-
-# The number of attempts to get information from the Falcon Service (with a ten second sleep after each attempt).
-retries="3"
 
 
 
@@ -77,41 +77,29 @@ function procesStatus() {
 # Validate Cisco Umbrella
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
+# Determine Cisco Umbrella Organizational ID
+if [[ -e "/opt/cisco/secureclient/Umbrella/OrgInfo.json" ]]; then
+    umbrellaOrgID=$( plutil -extract organizationId raw /opt/cisco/secureclient/Umbrella/OrgInfo.json )
+    protectionStatus=$( nslookup -q=txt debug.opendns.com | grep "${umbrellaOrgID}" )
+    if [[ -n "${protectionStatus}" ]]; then
+        processCheckResult+="Filter Check: Active; "
+    else
+        processCheckResult+="Filter Check: Failed; "
+    fi
+else
+    processCheckResult+="Filter Check Failed: Not Installed; "
+fi
+
 # Validate Cisco Umbrella System Extension
 systemExtensionTest=$( systemextensionsctl list | awk -F"[][]" '/com.cisco.anyconnect.macos.acsockext/ {print $2}' )
 
 case "${systemExtensionTest}" in
-    *"activated enabled"*   ) processCheckResult="'System Extension' Running; " ;;
-    *                       ) processCheckResult="'System Extension' Failed; " ;;
+    *"activated enabled"*   ) processCheckResult+="'System Extension' Running; " ;;
+    *                       ) processCheckResult+="'System Extension' Failed; " ;;
 esac
 
 # Validate various Cisco Umbrella Processes
 procesStatus "com.cisco.anyconnect.macos.acsockext"
-
-# Validate Cisco Umbrella Protection
-protectionStatus=$( curl -s http://examplemalwaredomain.com )
-
-# Retry loop for failed filter check
-counter=1
-until [[ "${protectionStatus}" == *"malware.opendns.com"* ]] || [[ "${counter}" -gt "${retries}" ]]; do
-    echo "Check ${counter} of ${retries} …"
-    sleep 10
-    protectionStatus=$( curl -s http://examplemalwaredomain.com )
-    ((counter++))
-done
-
-# Output various conditions
-case $protectionStatus in
-    *"malware.opendns.com"* )
-        processCheckResult+="Filter Active; "
-        ;;
-    *"301 Moved Permanently"* )
-        processCheckResult+="Filter Failed; "
-        ;;
-    * )
-        processCheckResult+="Filter Unknown; "
-        ;;
-esac
 
 
 
