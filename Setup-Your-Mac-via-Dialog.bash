@@ -73,8 +73,8 @@ promptForAssetTag="true"
 promptForRoom="true"
 promptForBuilding="true"
 promptForDepartment="true"
-promptForPosition="true"        # When set to true dynamically prompts the user to select from a list of positions or manually enter one at the logMessage "WELCOME DIALOG", see "positionListRaw" to define the selection / entry type
-promptForConfiguration="true"   # Removes the Configuration dropdown entirely and uses the "Catch-all (i.e., used when `logMessage "WELCOME DIALOG"` is set to `video` or `false`)" or presetConfiguration policyJSON
+promptForPosition="true"        # When set to true dynamically prompts the user to select from a list of positions or manually enter one at the welcomeDialog, see "positionListRaw" to define the selection / entry type
+promptForConfiguration="true"   # Removes the Configuration dropdown entirely and uses the "Catch-all (i.e., used when `welcomeDialog` is set to `video` or `false`)" or presetConfiguration policyJSON
 
 # Set to "true" to suppress the Update Inventory option on policies that are called
 suppressReconOnPolicy="false"
