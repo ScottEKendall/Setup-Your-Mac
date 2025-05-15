@@ -1819,7 +1819,7 @@ fi
 
 welcomeMessage+="\n\n---"
 
-if { [[ "${promptForConfiguration}" == "true" ]] && [[ "${logMessage "WELCOME DIALOG"}" != "messageOnly" ]]; } then
+if { [[ "${promptForConfiguration}" == "true" ]] && [[ "${welcomeDialog}" != "messageOnly" ]]; } then
     welcomeMessage+="  \n\n#### Configurations  \n- **${configurationOneName}:** ${configurationOneDescription}  \n- **${configurationTwoName}:** ${configurationTwoDescription}  \n- **${configurationThreeName}:** ${configurationThreeDescription}"
 else
     welcomeMessage=${welcomeMessage//", select your preferred **Configuration**"/}
@@ -2689,7 +2689,7 @@ function policyJSONConfiguration() {
             '
             ;;
 
-        * ) # Catch-all (i.e., used when `logMessage "WELCOME DIALOG"` is set to `video`, `messageOnly` or `false`)
+        * ) # Catch-all (i.e., used when `welcomeDialog` is set to `video`, `messageOnly` or `false`)
 
             overlayoverride="/System/Library/CoreServices/Finder.app"
             policyJSON='
@@ -2987,7 +2987,7 @@ elif [[ "${welcomeDialog}" == "messageOnly" ]]; then
 
     outputLineNumberInVerboseDebugMode
 
-    logMessage "WELCOME DIALOG" "Displaying ${logMessage "WELCOME DIALOG"} …"
+    logMessage "WELCOME DIALOG" "Displaying ${welcomeDialog} …"
 
     # Construct `welcomeJSON`, sans `textfield` and `selectitems`
     welcomeJSON='
