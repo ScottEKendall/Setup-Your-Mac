@@ -942,7 +942,7 @@ function setupYourMacDialogInfoboxAnimation() {
 function checkNetworkQualityConfigurations() {
     
     myPID="$$"
-    welcomeDialog "Display Welcome dialog 'infobox' animation …"
+    logMessage "SETUP YOUR MAC DIALOG" "Display Welcome dialog 'infobox' animation …"
     welcomeDialogInfoboxAnimation "$myPID" &
     welcomeDialogInfoboxAnimationPID="$!"
 
@@ -950,7 +950,7 @@ function checkNetworkQualityConfigurations() {
     kill ${welcomeDialogInfoboxAnimationPID}
     outputLineNumberInVerboseDebugMode
 
-    welcomeDialog "Completed networkQualityTest …"
+    logMessage "SETUP YOUR MAC DIALOG" "Completed networkQualityTest …"
     networkQualityTest=$( < /var/tmp/networkQualityTest )
     rm /var/tmp/networkQualityTest
 
@@ -973,26 +973,26 @@ function checkNetworkQualityConfigurations() {
     esac
 
     mbps=$( echo "scale=2; ( $dlThroughput / 1000000 )" | bc )
-    welcomeDialog "$mbps (Mbps)"
+    logMessage "SETUP YOUR MAC DIALOG"  "$mbps (Mbps)"
 
     configurationOneEstimatedSeconds=$( echo "scale=2; ((((( $configurationOneSize / $mbps ) * 60 ) * 60 ) * $correctionCoefficient ) + $configurationOneInstallBuffer)" | bc | sed 's/\.[0-9]*//' )
-    welcomeDialog "Configuration One Estimated Seconds: $configurationOneEstimatedSeconds"
-    welcomeDialog "Configuration One Estimate: $(printf '%dh:%dm:%ds\n' $((configurationOneEstimatedSeconds/3600)) $((configurationOneEstimatedSeconds%3600/60)) $((configurationOneEstimatedSeconds%60)))"
+    logMessage "SETUP YOUR MAC DIALOG"  "Configuration One Estimated Seconds: $configurationOneEstimatedSeconds"
+    logMessage "SETUP YOUR MAC DIALOG"  "Configuration One Estimate: $(printf '%dh:%dm:%ds\n' $((configurationOneEstimatedSeconds/3600)) $((configurationOneEstimatedSeconds%3600/60)) $((configurationOneEstimatedSeconds%60)))"
 
     configurationTwoEstimatedSeconds=$( echo "scale=2; ((((( $configurationTwoSize / $mbps ) * 60 ) * 60 ) * $correctionCoefficient ) + $configurationTwoInstallBuffer)" | bc | sed 's/\.[0-9]*//' )
-    welcomeDialog "Configuration Two Estimated Seconds: $configurationTwoEstimatedSeconds"
-    welcomeDialog "Configuration Two Estimate: $(printf '%dh:%dm:%ds\n' $((configurationTwoEstimatedSeconds/3600)) $((configurationTwoEstimatedSeconds%3600/60)) $((configurationTwoEstimatedSeconds%60)))"
+    logMessage "SETUP YOUR MAC DIALOG"  "Configuration Two Estimated Seconds: $configurationTwoEstimatedSeconds"
+    logMessage "SETUP YOUR MAC DIALOG"  "Configuration Two Estimate: $(printf '%dh:%dm:%ds\n' $((configurationTwoEstimatedSeconds/3600)) $((configurationTwoEstimatedSeconds%3600/60)) $((configurationTwoEstimatedSeconds%60)))"
 
     configurationThreeEstimatedSeconds=$( echo "scale=2; ((((( $configurationThreeSize / $mbps ) * 60 ) * 60 ) * $correctionCoefficient ) + $configurationThreeInstallBuffer)" | bc | sed 's/\.[0-9]*//' )
-    welcomeDialog "Configuration Three Estimated Seconds: $configurationThreeEstimatedSeconds"
-    welcomeDialog "Configuration Three Estimate: $(printf '%dh:%dm:%ds\n' $((configurationThreeEstimatedSeconds/3600)) $((configurationThreeEstimatedSeconds%3600/60)) $((configurationThreeEstimatedSeconds%60)))"
+    logMessage "SETUP YOUR MAC DIALOG"  "Configuration Three Estimated Seconds: $configurationThreeEstimatedSeconds"
+    logMessage "SETUP YOUR MAC DIALOG"  "Configuration Three Estimate: $(printf '%dh:%dm:%ds\n' $((configurationThreeEstimatedSeconds/3600)) $((configurationThreeEstimatedSeconds%3600/60)) $((configurationThreeEstimatedSeconds%60)))"
 
-    welcomeDialog "Network Quality Test: Started: $dlStartDate, Ended: $dlEndDate; Download: $mbps Mbps, Responsiveness: $dlResponsiveness"
+    logMessage "SETUP YOUR MAC DIALOG"  "Network Quality Test: Started: $dlStartDate, Ended: $dlEndDate; Download: $mbps Mbps, Responsiveness: $dlResponsiveness"
     dialogUpdateWelcome "infobox: **Connection:**  \n- Download:  \n$mbps Mbps  \n\n**Estimates:**  \n- ${configurationOneName}:  \n$(printf '%dh:%dm:%ds\n' $((configurationOneEstimatedSeconds/3600)) $((configurationOneEstimatedSeconds%3600/60)) $((configurationOneEstimatedSeconds%60)))  \n\n- ${configurationTwoName}:  \n$(printf '%dh:%dm:%ds\n' $((configurationTwoEstimatedSeconds/3600)) $((configurationTwoEstimatedSeconds%3600/60)) $((configurationTwoEstimatedSeconds%60)))  \n\n- ${configurationThreeName}:  \n$(printf '%dh:%dm:%ds\n' $((configurationThreeEstimatedSeconds/3600)) $((configurationThreeEstimatedSeconds%3600/60)) $((configurationThreeEstimatedSeconds%60)))"
 
     # If option to lock the continue button is set to true, enable the continue button now to let the user progress
     if [[ "${lockContinueBeforeEstimations}" == "true" ]]; then
-        welcomeDialog "Enabling Continue Button"
+        logMessage "SETUP YOUR MAC DIALOG"  "Enabling Continue Button"
         dialogUpdateWelcome "button1: enable"
     fi
 }
@@ -3415,7 +3415,7 @@ if [[ -n ${building} ]]; then infobox+="**Building:**  \n$building  \n\n" ; fi
 if [[ -n ${room} ]]; then infobox+="**Room:**  \n$room  \n\n" ; fi
 if [[ -n ${position} ]]; then infobox+="**Position:**  \n$position  \n\n" ; fi
 
-if { [[ "${promptForConfiguration}" != "true" ]] && [[ "${configurationDownloadEstimation}" == "true" ]]; } || { [[ "${logMessage "WELCOME DIALOG"}" == "false" ]] || [[ "${logMessage "WELCOME DIALOG"}" == "messageOnly" ]]; } then
+if { [[ "${promptForConfiguration}" != "true" ]] && [[ "${configurationDownloadEstimation}" == "true" ]]; } || { [[ "${welcomeDialog}" == "false" ]] || [[ "${welcomeDialog}" == "messageOnly" ]]; } then
     logMessage "SETUP YOUR MAC DIALOG" "Purposely NOT updating 'infobox'"
 else
     logMessage "SETUP YOUR MAC DIALOG" "Updating 'infobox'"
