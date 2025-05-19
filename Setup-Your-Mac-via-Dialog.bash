@@ -31,13 +31,12 @@
 # Script Version and Jamf Pro Script Parameters
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-scriptVersion="1.16.0-b6"
+scriptVersion="1.16.0-b7"
 export PATH=/usr/bin:/bin:/usr/sbin:/sbin
 scriptLog="${4:-"/var/log/org.churchofjesuschrist.log"}"                        # Parameter 4: Script Log Location [ /var/log/org.churchofjesuschrist.log ] (i.e., Your organization's default location for client-side logs)
-debugMode="${5:-"verbose"}"                                                     # Parameter 5: Debug Mode [ verbose (default) | true | false ]
+debugMode="${5:-"true"}"                                                        # Parameter 5: Debug Mode [ verbose (default) | true | false ]
 welcomeDialog="${6:-"userInput"}"                                               # Parameter 6: Welcome dialog [ userInput (default) | video | messageOnly | false ]
-completionActionOption="${7:-"Restart Attended"}"                               # Parameter 7: Completion Action [ wait | sleep (with seconds) | Shut Down | Shut Down Attended | Shut Down Confirm | Restart | Restart Attended (default) | Restart Confirm | Log Out | Log Out Attended | Log Out Confirm ]
-requiredMinimumBuild="${8:-"disabled"}"                                         # Parameter 8: Required Minimum Build [ disabled (default) | 23F ] (i.e., Your organization's required minimum build of macOS to allow users to proceed; use "23F" for macOS 14.5)
+completionActionOption="${7:-"Restart Confirm"}"                                # Parameter 7: Completion Action [ wait | sleep (with seconds) | Shut Down | Shut Down Attended | Shut Down Confirm | Restart | Restart Attended (default) | Restart Confirm | Log Out | Log Out Attended | Log Out Confirm ]requiredMinimumBuild="${8:-"disabled"}"                                         # Parameter 8: Required Minimum Build [ disabled (default) | 23F ] (i.e., Your organization's required minimum build of macOS to allow users to proceed; use "23F" for macOS 14.5)
 outdatedOsAction="${9:-"/System/Library/CoreServices/Software Update.app"}"     # Parameter 9: Outdated OS Action [ /System/Library/CoreServices/Software Update.app (default) | jamfselfservice://content?entity=policy&id=117&action=view ] (i.e., Jamf Pro Self Service policy ID for operating system ugprades)
 webhookURL="${10:-""}"                                                          # Parameter 10: Microsoft Teams or Slack Webhook URL [ Leave blank to disable (default) | https://microsoftTeams.webhook.com/URL | https://hooks.slack.com/services/URL ] Can be used to send a success or failure message to Microsoft Teams or Slack via Webhook. (Function will automatically detect if Webhook URL is for Slack or Teams; can be modified to include other communication tools that support functionality.)
 presetConfiguration="${11:-""}"                                                 # Parameter 11: Specify a Configuration (i.e., `policyJSON`; NOTE: If set, `promptForConfiguration` will be automatically suppressed and the preselected configuration will be used instead)
@@ -3118,16 +3117,16 @@ elif [[ "${welcomeDialog}" == "userInput" ]]; then
             # Output the various values from the welcomeResults JSON to the log file
             ###
 
-            welcomeDialog "• Computer Name: $computerName"
-            welcomeDialog "• User Name: $userName"
-            welcomeDialog "• Real Name: $realName"
-            welcomeDialog "• E-mail: $email"
-            welcomeDialog "• Asset Tag: $assetTag"
-            welcomeDialog "• Configuration: $symConfiguration"
-            welcomeDialog "• Department: $department"
-            welcomeDialog "• Building: $building"
-            welcomeDialog "• Room: $room"
-            welcomeDialog "• Position: $position"
+            logMessage "WELCOME DIALOG"  "• Computer Name: $computerName"
+            logMessage "WELCOME DIALOG"  "• User Name: $userName"
+            logMessage "WELCOME DIALOG"  "• Real Name: $realName"
+            logMessage "WELCOME DIALOG"  "• E-mail: $email"
+            logMessage "WELCOME DIALOG"  "• Asset Tag: $assetTag"
+            logMessage "WELCOME DIALOG"  "• Configuration: $symConfiguration"
+            logMessage "WELCOME DIALOG"  "• Department: $department"
+            logMessage "WELCOME DIALOG"  "• Building: $building"
+            logMessage "WELCOME DIALOG"  "• Room: $room"
+            logMessage "WELCOME DIALOG"  "• Position: $position"
 
             ###
             # Select `policyJSON` based on selected Configuration
@@ -3145,7 +3144,7 @@ elif [[ "${welcomeDialog}" == "userInput" ]]; then
             if [[ -n "${computerName}" ]]; then
 
                 # UNTESTED, UNSUPPORTED "YOYO" EXAMPLE
-                welcomeDialog "Set Computer Name …"
+                logMessage "WELCOME DIALOG"  "Set Computer Name …"
                 currentComputerName=$( scutil --get ComputerName )
                 currentLocalHostName=$( scutil --get LocalHostName )
 
@@ -3157,8 +3156,8 @@ elif [[ "${welcomeDialog}" == "userInput" ]]; then
 
                 if [[ "${debugMode}" == "true" ]] || [[ "${debugMode}" == "verbose" ]] ; then
 
-                    welcomeDialog "DEBUG MODE: Would have renamed computer from: \"${currentComputerName}\" to \"${computerName}\" "
-                    welcomeDialog "DEBUG MODE: Would have renamed LocalHostName from: \"${currentLocalHostName}\" to \"${newLocalHostName}\" "
+                    logMessage "WELCOME DIALOG"  "DEBUG MODE: Would have renamed computer from: \"${currentComputerName}\" to \"${computerName}\" "
+                    logMessage "WELCOME DIALOG"  "DEBUG MODE: Would have renamed LocalHostName from: \"${currentLocalHostName}\" to \"${newLocalHostName}\" "
 
                 else
 
@@ -3171,16 +3170,16 @@ elif [[ "${welcomeDialog}" == "userInput" ]]; then
                     # Delay required to reflect change …
                     # … side-effect is a delay in the "Setup Your Mac" dialog appearing
                     sleep 5
-                    welcomeDialog "Renamed computer from: \"${currentComputerName}\" to \"$( scutil --get ComputerName )\" "
-                    welcomeDialog "Renamed LocalHostName from: \"${currentLocalHostName}\" to \"$( scutil --get LocalHostName )\" "
+                    logMessage "WELCOME DIALOG"  "Renamed computer from: \"${currentComputerName}\" to \"$( scutil --get ComputerName )\" "
+                    logMessage "WELCOME DIALOG"  "Renamed LocalHostName from: \"${currentLocalHostName}\" to \"$( scutil --get LocalHostName )\" "
 
                 fi
 
             else
 
-                welcomeDialog "${loggedInUser} did NOT specify a new computer name"
-                welcomeDialog "• Current Computer Name: \"$( scutil --get ComputerName )\" "
-                welcomeDialog "• Current Local Host Name: \"$( scutil --get LocalHostName )\" "
+                logMessage "WELCOME DIALOG"  "${loggedInUser} did NOT specify a new computer name"
+                logMessage "WELCOME DIALOG"  "• Current Computer Name: \"$( scutil --get ComputerName )\" "
+                logMessage "WELCOME DIALOG"  "• Current Local Host Name: \"$( scutil --get LocalHostName )\" "
 
             fi
 
@@ -3223,7 +3222,7 @@ elif [[ "${welcomeDialog}" == "userInput" ]]; then
             if [[ -n "${position}" ]]; then reconOptions+="-position \"${position}\" "; fi
 
             # Output `recon` options to log
-            welcomeDialog "reconOptions: ${reconOptions}"
+            logMessage "WELCOME DIALOG"  "reconOptions: ${reconOptions}"
 
             ###
             # Display "Setup Your Mac" dialog (and capture Process ID)
