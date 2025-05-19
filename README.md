@@ -1,16 +1,13 @@
 <!-- markdownlint-disable-next-line first-line-heading no-inline-html -->
 [<img align="left" alt="Setup Your Mac (1.16.0)" src="images/SYM_icon.png" width="128" />](https://snelson.us/sym)
  
-# Setup Your Mac (1.16.0) with SYM-Helper (1.2.0) via swiftDialog (2.5.2)
+# Setup Your Mac (1.16.0) with SYM-Helper (1.2.1) via swiftDialog (2.5.6)
 
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/dan-snelson/Setup-Your-Mac?display_name=tag) ![GitHub issues](https://img.shields.io/github/issues-raw/dan-snelson/Setup-Your-Mac) ![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/dan-snelson/Setup-Your-Mac) ![GitHub pull requests](https://img.shields.io/github/issues-pr-raw/dan-snelson/Setup-Your-Mac) ![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed-raw/dan-snelson/Setup-Your-Mac)
 
-> Optimized to leverage SYM-Helper (1.2.0), Setup Your Mac (1.16.0) leverages new features of swiftDialog (2.5.2)
+> Optimized for SYM-Helper (1.2.1), Setup Your Mac (1.16.0) leverages new features of swiftDialog (2.5.6)
 
 [<img alt="Setup Your Mac (1.15.0)" src="images/SYM-Helper_1.2.0_SYM-1.15.0_Hero.png" />](https://snelson.us/sym)
-
-
-## Introduction
 
 Apple's Automated Device Enrollment helps streamline Mobile Device Management (MDM) enrollment and device Supervision during activation, enabling IT to manage enterprise devices with "zero touch."
 

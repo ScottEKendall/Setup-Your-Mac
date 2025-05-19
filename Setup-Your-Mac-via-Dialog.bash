@@ -10,12 +10,13 @@
 #
 # HISTORY
 #
-#   Version 1.16.0, 20-Feb-2025
+#   Version 1.16.0, 19-May-2025
 #   - Added proof-of-concept validations for swiftDialog `2.5.1`'s "blurscreen" control
 #   - Removed vendor-specific Local Validations (in favor of Remote Validations)
 #   - Updated Configuration `policyJSON` to better match internal usage
 #   - Added "activate" command to Validations
 #   - Updated the Microsoft Teams message template to the new format #156 (thanks, @nlopezUA!)
+#   - Simplify Client-side Logging (thanks, @DevliegereM!)
 #
 ####################################################################################################
 
@@ -34,13 +35,13 @@
 scriptVersion="1.16.0-b7"
 export PATH=/usr/bin:/bin:/usr/sbin:/sbin
 scriptLog="${4:-"/var/log/org.churchofjesuschrist.log"}"                        # Parameter 4: Script Log Location [ /var/log/org.churchofjesuschrist.log ] (i.e., Your organization's default location for client-side logs)
-debugMode="${5:-"true"}"                                                        # Parameter 5: Debug Mode [ verbose (default) | true | false ]
+debugMode="${5:-"verbose"}"                                                     # Parameter 5: Debug Mode [ verbose (default) | true | false ]
 welcomeDialog="${6:-"userInput"}"                                               # Parameter 6: Welcome dialog [ userInput (default) | video | messageOnly | false ]
-completionActionOption="${7:-"Restart Confirm"}"                                # Parameter 7: Completion Action [ wait | sleep (with seconds) | Shut Down | Shut Down Attended | Shut Down Confirm | Restart | Restart Attended (default) | Restart Confirm | Log Out | Log Out Attended | Log Out Confirm ]requiredMinimumBuild="${8:-"disabled"}"                                         # Parameter 8: Required Minimum Build [ disabled (default) | 23F ] (i.e., Your organization's required minimum build of macOS to allow users to proceed; use "23F" for macOS 14.5)
+completionActionOption="${7:-"Restart Attended"}"                               # Parameter 7: Completion Action [ wait | sleep (with seconds) | Shut Down | Shut Down Attended | Shut Down Confirm | Restart | Restart Attended (default) | Restart Confirm | Log Out | Log Out Attended | Log Out Confirm ]requiredMinimumBuild="${8:-"disabled"}"                                         # Parameter 8: Required Minimum Build [ disabled (default) | 23F ] (i.e., Your organization's required minimum build of macOS to allow users to proceed; use "23F" for macOS 14.5)
 outdatedOsAction="${9:-"/System/Library/CoreServices/Software Update.app"}"     # Parameter 9: Outdated OS Action [ /System/Library/CoreServices/Software Update.app (default) | jamfselfservice://content?entity=policy&id=117&action=view ] (i.e., Jamf Pro Self Service policy ID for operating system ugprades)
 webhookURL="${10:-""}"                                                          # Parameter 10: Microsoft Teams or Slack Webhook URL [ Leave blank to disable (default) | https://microsoftTeams.webhook.com/URL | https://hooks.slack.com/services/URL ] Can be used to send a success or failure message to Microsoft Teams or Slack via Webhook. (Function will automatically detect if Webhook URL is for Slack or Teams; can be modified to include other communication tools that support functionality.)
 presetConfiguration="${11:-""}"                                                 # Parameter 11: Specify a Configuration (i.e., `policyJSON`; NOTE: If set, `promptForConfiguration` will be automatically suppressed and the preselected configuration will be used instead)
-swiftDialogMinimumRequiredVersion="2.5.5.4802"                                  # This will be set and updated as dependancies on newer features change.
+swiftDialogMinimumRequiredVersion="2.5.6.4805"                                  # This will be set and updated as dependancies on newer features change.
 
 
 
@@ -174,7 +175,7 @@ configurationThreeInstallBuffer="0"         # Buffer time added to estimates to 
 ####################################################################################################
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-# Client-side Logging
+# Client-side Logging (thanks, @DevliegereM!)
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 function logMessage() {
@@ -182,6 +183,8 @@ function logMessage() {
     local message="$2"
     echo -e "${organizationScriptName} ($scriptVersion): $(date +%Y-%m-%d\ %H:%M:%S) - [${logType}] ${message}" | tee -a "${scriptLog}"
 }
+
+
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # Output Line Number in `verbose` Debug Mode (thanks, @bartreardon!)
