@@ -10,7 +10,7 @@
 #
 # HISTORY
 #
-#   Version 1.16.0, 19-May-2025
+#   Version 1.16.0, 20-May-2025
 #   - Added proof-of-concept validations for swiftDialog `2.5.1`'s "blurscreen" control
 #   - Removed vendor-specific Local Validations (in favor of Remote Validations)
 #   - Updated Configuration `policyJSON` to better match internal usage
@@ -32,7 +32,7 @@
 # Script Version and Jamf Pro Script Parameters
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-scriptVersion="1.16.0-b7"
+scriptVersion="1.16.0-b8"
 export PATH=/usr/bin:/bin:/usr/sbin:/sbin
 scriptLog="${4:-"/var/log/org.churchofjesuschrist.log"}"                        # Parameter 4: Script Log Location [ /var/log/org.churchofjesuschrist.log ] (i.e., Your organization's default location for client-side logs)
 debugMode="${5:-"verbose"}"                                                     # Parameter 5: Debug Mode [ verbose (default) | true | false ]
@@ -3380,7 +3380,7 @@ dialogUpdateWelcome "quit:"
 
 outputLineNumberInVerboseDebugMode
 
-if [[ "${symConfiguration}" == *"Catch-all"* ]] || [[ -z "${symConfiguration}" ]] || [[ "${logMessage "WELCOME DIALOG"}" != "userInput" ]]; then
+if [[ "${symConfiguration}" == *"Catch-all"* ]] || [[ -z "${symConfiguration}" ]] || [[ "${welcomeDialog}" != "userInput" ]]; then
 
     if [[ "${configurationDownloadEstimation}" == "true" ]]; then
 
@@ -3394,7 +3394,7 @@ if [[ "${symConfiguration}" == *"Catch-all"* ]] || [[ -z "${symConfiguration}" ]
 
     else
 
-        # When `logMessage "WELCOME DIALOG"` is set to `false` or `video`, set the value of `infoboxConfiguration` to null (thanks for the idea, @Manikandan!)
+        # When `welcomeDialog` is set to `false` or `video`, set the value of `infoboxConfiguration` to null (thanks for the idea, @Manikandan!)
         infoboxConfiguration=""
 
     fi
