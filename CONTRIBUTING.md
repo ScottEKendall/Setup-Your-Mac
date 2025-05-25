@@ -1,9 +1,9 @@
 <!-- markdownlint-disable-next-line first-line-heading no-inline-html -->
-[<img align="left" alt="Setup Your Mac (1.12.0)" src="images/SYM_icon.png" width="128" />](https://snelson.us/sym)
-
-# Contributing to Setup Your Mac
+[<img align="left" alt="Setup Your Mac" src="images/SYM_icon.png" width="128" />](https://github.com/setup-your-mac/Setup-Your-Mac/wiki)
 
 <br>
+
+# Contributing to <br> Setup Your Mac
 
 ## Welcome and Thank You!
 Welcome and thank you for considering contributing _your_ unique talents to [Setup Your Mac](https://snelson.us/sym); this project wouldn't be what it is today without the assistance of MacAdmins worldwide just like you.
@@ -25,9 +25,3 @@ Even if you can't _yet_ write `code` you're comfortable sharing with the world, 
 [Pull Requests](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests) are the lifeblood of all open-source projects.
 
 If you're hesitant to submit a PR to the [main SYM script](Setup-Your-Mac-via-Dialog.bash), contributing a [Remote Validation](Validations/README.md) is a great place to start.
-
----
-
-## Recognition
-
-On 16-Sep-2023, Setup Your Mac started leveraging [All Contributors](https://github.com/all-contributors/all-contributors/blob/master/README.md) — "Recognize all contributors, not just the ones who push code" — so _any_ and _every_ contribution you provide [will be recognized](CONTRIBUTORS.md).

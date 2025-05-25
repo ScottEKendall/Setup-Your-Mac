@@ -1,9 +1,9 @@
 <!-- markdownlint-disable-next-line first-line-heading no-inline-html -->
-[<img align="left" alt="Setup Your Mac (1.13.0)" src="images/SYM_icon.png" width="128" />](https://snelson.us/sym)
+[<img align="left" alt="Setup Your Mac" src="images/SYM_icon.png" width="128" />](https://github.com/setup-your-mac/Setup-Your-Mac/wiki)
 
 <br>
 
-# Setup Your Mac Contributors
+# Setup Your Mac <br> Contributors
 
 > ## `sym-devs`
 > A special thanks to the following individuals who have been _**absolutely, positively indispensable**_ during the ongoing development of Setup Your Mac.

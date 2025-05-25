@@ -1,19 +1,19 @@
 <!-- markdownlint-disable-next-line first-line-heading no-inline-html -->
-[<img align="left" alt="Setup Your Mac (1.16.0)" src="images/SYM_icon.png" width="128" />](https://snelson.us/sym)
- 
-# Setup Your Mac (1.16.0) with SYM-Helper (1.2.1) via swiftDialog (2.5.6)
+[<img align="left" alt="Setup Your Mac (1.16.0)" src="images/SYM_icon.png" width="128" />](https://github.com/setup-your-mac/Setup-Your-Mac/wiki)
+
+# Setup Your Mac (1.16.0) <br> with SYM-Helper (1.2.1) <br> via swiftDialog (2.5.6)
 
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/dan-snelson/Setup-Your-Mac?display_name=tag) ![GitHub issues](https://img.shields.io/github/issues-raw/dan-snelson/Setup-Your-Mac) ![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/dan-snelson/Setup-Your-Mac) ![GitHub pull requests](https://img.shields.io/github/issues-pr-raw/dan-snelson/Setup-Your-Mac) ![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed-raw/dan-snelson/Setup-Your-Mac)
 
 > Optimized for SYM-Helper (1.2.1), Setup Your Mac (1.16.0) leverages new features of swiftDialog (2.5.6)
 
-[<img alt="Setup Your Mac (1.15.0)" src="images/SYM-Helper_1.2.0_SYM-1.15.0_Hero.png" />](https://snelson.us/sym)
+[<img alt="Setup Your Mac (1.15.0)" src="images/SYM-Helper_1.2.0_SYM-1.15.0_Hero.png" />](https://github.com/setup-your-mac/Setup-Your-Mac/wiki)
 
 Apple's Automated Device Enrollment helps streamline Mobile Device Management (MDM) enrollment and device Supervision during activation, enabling IT to manage enterprise devices with "zero touch."
 
 **Setup Your Mac** aims to simplify initial device configuration by leveraging `swiftDialog` and Jamf Pro Policy Custom Events to allow end-users to self-complete Mac setup _post-enrollment_.
 
-[Continue reading …](https://snelson.us/sym)
+[Continue reading …](https://github.com/setup-your-mac/Setup-Your-Mac/wiki)
 
 ### Script
 - [Setup-Your-Mac-via-Dialog.bash](Setup-Your-Mac-via-Dialog.bash)
@@ -25,13 +25,13 @@ A special thanks to the ever-growing list of [contributors](CONTRIBUTORS.md); le
 
 # SYM-Helper
 
-> A stand-alone macOS app to help MacAdmins more easily deploy [Setup Your Mac](https://snelson.us/sym)
+> A stand-alone macOS app to help MacAdmins more easily deploy [Setup Your Mac](https://github.com/setup-your-mac/Setup-Your-Mac/wiki)
 
 ![SYM-Helper Hero](images/SYM-Helper-1.2.0-Hero.png)
 
 **NOTE:** When editing [Setup-Your-Mac-via-Dialog.bash](Setup-Your-Mac-via-Dialog.bash), &ldquo;[SYM-Helper]&rdquo; indicates variables which can be configured with SYM-Helper.
 
-[Documentation](https://snelson.us/sym) | [Releases](https://github.com/setup-your-mac/SYM-Helper/releases)
+[Documentation](https://github.com/setup-your-mac/Setup-Your-Mac/wiki) | [Releases](https://github.com/setup-your-mac/SYM-Helper/releases)
 
 ---
 
