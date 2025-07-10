@@ -18,6 +18,7 @@
 #   - Updated the Microsoft Teams message template to the new format #156 (thanks, @nlopezUA!)
 #   - Simplify Client-side Logging (thanks, @DevliegereM!)
 #   - Added proof-of-concept validations for swiftDialog `2.5.6`'s "hide or show" dialog window
+#   - Updated Dynamic Download Estimates for macOS 26 (and beyond)
 #
 ####################################################################################################
 
@@ -33,7 +34,7 @@
 # Script Version and Jamf Pro Script Parameters
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-scriptVersion="1.16.0-b9"
+scriptVersion="1.16.0-b10"
 export PATH=/usr/bin:/bin:/usr/sbin:/sbin
 scriptLog="${4:-"/var/log/org.churchofjesuschrist.log"}"                        # Parameter 4: Script Log Location [ /var/log/org.churchofjesuschrist.log ] (i.e., Your organization's default location for client-side logs)
 debugMode="${5:-"verbose"}"                                                     # Parameter 5: Debug Mode [ verbose (default) | true | false ]
@@ -992,7 +993,7 @@ function checkNetworkQualityConfigurations() {
             dlEndDate="N/A; macOS ${osVersion}"
             ;;
 
-        12* | 13* | 14* | 15* )
+        * )
             dlThroughput=$( get_json_value "$networkQualityTest" "dl_throughput")
             dlResponsiveness=$( get_json_value "$networkQualityTest" "dl_responsiveness" )
             dlStartDate=$( get_json_value "$networkQualityTest" "start_date" )
