@@ -209,6 +209,17 @@ function runAsUser() {
 
 }
 
+function greeting() {
+    hour=$(date +%H)
+    if [[ $hour -le 11 ]]; then
+        echo "Good morning"
+    elif [[ $hour -le 18 ]]; then
+        echo "Good afternoon"
+    else
+        echo "Good evening"
+    fi
+}
+
 
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -1813,7 +1824,8 @@ failureCommandFile=$( mktemp -u /var/tmp/dialogCommandFileFailure.XXX )
 # "Welcome" dialog Title, Message and Icon
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-welcomeTitle="Happy $( date +'%A' ), ${loggedInUserFirstname}!  \nWelcome to your new ${modelName}"
+timeOfDay=$(greeting)
+welcomeTitle="$timeOfDay ${loggedInUserFirstname}!  \nWelcome to your new ${modelName}"
 
 welcomeMessage="Please enter the **required** information for your ${modelName}, select your preferred **Configuration** then click **Continue** to start applying settings to your new Mac.  \n\nOnce completed, the **Wait** button will be enabled and you‘ll be able to review the results before restarting your ${modelName}."
 
@@ -1856,7 +1868,7 @@ else
 fi
 
 if [[ "${brandingBannerDisplayText}" == "true" ]]; then
-    welcomeBannerText="Happy $( date +'%A' ), ${loggedInUserFirstname}!  \nWelcome to your new ${modelName}"
+    welcomeBannerText="$timeOfDay ${loggedInUserFirstname}!  \nWelcome to your new ${modelName}"
 else
     welcomeBannerText=" "
 fi
