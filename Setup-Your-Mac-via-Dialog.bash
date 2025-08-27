@@ -2197,9 +2197,15 @@ helpmessage+="- **Started:** ${timestamp}"
 
 infobox="Analyzing input …" # Customize at "Update Setup Your Mac's infobox"
 
+# Determine which Self Service is running on the user's Mac and set the appropriate key
+# Set the key to search for SS+ (self_service_plus_path), but if we find regular SS, then reset the key to (self_service_app_path)
+selfservicekey="self_service_plus_path"
+if [[ -e "/Applications/Self Service.app" ]]; then
+    selfservicekey="self_service_app_path"
+fi
 
 # Create `overlayicon` from Self Service's custom icon (thanks, @meschwartz!)
-xxd -p -s 260 "$(defaults read /Library/Preferences/com.jamfsoftware.jamf self_service_app_path)"/Icon$'\r'/..namedfork/rsrc | xxd -r -p > /var/tmp/overlayicon.icns
+xxd -p -s 260 "$(defaults read /Library/Preferences/com.jamfsoftware.jamf $selfservicekey)"/Icon$'\r'/..namedfork/rsrc | xxd -r -p > /var/tmp/overlayicon.icns
 overlayicon="/var/tmp/overlayicon.icns"
 
 # Uncomment to use generic, Self Service icon as overlayicon
